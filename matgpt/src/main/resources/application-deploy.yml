@@ -1,0 +1,81 @@
+spring:
+  config:
+    import:
+      - classpath:/application-secret.yml
+
+ datasource:
+   driver-class-name: com.mysql.cj.jdbc.Driver
+   url: jdbc:mysql://mysql:3306/matgpt_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+   username: "piggle"
+   password: "123456789"
+
+
+ jpa:
+   hibernate:
+     ddl-auto: update
+   properties:
+     hibernate:
+       dialect: org.hibernate.dialect.MySQLDialect
+       format_sql: true
+       show_sql: true
+   open-in-view: false
+
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${USERNAME}
+    password: ${PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  logging:
+    level:
+      root: INFO
+
+  server:
+    port: 8080
+
+jwt:
+  secret: ${JWTSECRET}
+
+springdoc:
+  enable-data-rest: false
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+
+
+chatgpt:
+  api:
+    key: ${GPTAPIKEY}
+
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLECLIENTID}
+            client-secret: ${GOOGLECLIENTSECRET}
+          kakao:
+            client-id: ${KAKAOCLIENTID}
+            client-secret: ${KAKAOCLIENTSECRET}
+
+cloud:
+  aws:
+    s3:
+      bucket: matgpt-dev
+    credentials:
+      access-key: ${AWSACCESSKEY}
+      secret-key: ${AWSSECRETKEY}
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
