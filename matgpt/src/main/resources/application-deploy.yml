@@ -1,4 +1,9 @@
-
+server:
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+  port: 8080
 
 
 spring:
@@ -48,8 +53,7 @@ logging:
   level:
     root: INFO
 
-server:
-  port: 8080
+
 
 jwt:
   secret: ${JWTSECRET}
