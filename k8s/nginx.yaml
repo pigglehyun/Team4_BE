@@ -14,17 +14,17 @@ spec:
         app: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginx:latest
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - name: nginx-config
-              mountPath: /etc/nginx/conf.d
-      volumes:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
         - name: nginx-config
-          configMap:
-            name: nginx
+          mountPath: /etc/nginx/conf.d
+      volumes:
+      - name: nginx-config
+        configMap:
+          name: nginx
 
 ---
 apiVersion: v1
@@ -40,12 +40,11 @@ spec:
       port: 80
       targetPort: 80
 ---
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    kubernetes.io/ingress.class: "nginx" # This annotation is added to specify the Ingress controller
   labels:
     app.kubernetes.io/managed-by: kargocd
   name: nginx
@@ -53,12 +52,8 @@ spec:
   rules:
     - http:
         paths:
-          - pathType: Prefix
-            path: "/"
-            backend:
-              service:
-                name: nginx-service
-                port:
-                  number: 80
-
-
+          - backend:
+              serviceName: nginx-service
+              servicePort: 80
+              path: /
+              pathType: Prefix
