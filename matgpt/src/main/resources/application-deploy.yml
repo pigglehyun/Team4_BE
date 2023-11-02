@@ -3,42 +3,54 @@ spring:
     import:
       - classpath:/application-secret.yml
 
- datasource:
-   driver-class-name: com.mysql.cj.jdbc.Driver
-   url: jdbc:mysql://mysql:3306/matgpt_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-   username: "piggle"
-   password: "123456789"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql:3306/matgpt_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${MYSQLUSERNAME}
+    password: ${MYSQLPASSWORD}
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLECLIENTID}
+            client-secret: ${GOOGLECLIENTSECRET}
+          kakao:
+            client-id: ${KAKAOCLIENTID}
+            client-secret: ${KAKAOCLIENTSECRET}
 
 
- jpa:
-   hibernate:
-     ddl-auto: update
-   properties:
-     hibernate:
-       dialect: org.hibernate.dialect.MySQLDialect
-       format_sql: true
-       show_sql: true
-   open-in-view: false
 
-
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ${USERNAME}
-    password: ${PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
     properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        show_sql: true
+    open-in-view: false
 
-  logging:
-    level:
-      root: INFO
 
-  server:
-    port: 8080
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: ${USERNAME}
+      password: ${PASSWORD}
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+
+    logging:
+      level:
+        root: INFO
+
+    server:
+      port: 8080
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWw
@@ -55,17 +67,6 @@ chatgpt:
     key: ${GPTAPIKEY}
 
 
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${GOOGLECLIENTID}
-            client-secret: ${GOOGLECLIENTSECRET}
-          kakao:
-            client-id: ${KAKAOCLIENTID}
-            client-secret: ${KAKAOCLIENTSECRET}
 
 cloud:
   aws:
