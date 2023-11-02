@@ -10,7 +10,7 @@ RUN ./gradlew clean build
 
 ENV DATABASE_URL=jdbc:mysql://mysql/matgpt_db
 
-CMD ["java", "-jar", "-Dspring.profiles.active=prod", "/home/gradle/project/build/libs/matgpt-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=deploy", "/home/gradle/project/build/libs/matgpt-0.0.1-SNAPSHOT.jar"]
 
 
 
