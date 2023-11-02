@@ -8,6 +8,8 @@ RUN echo "systemProp.http.proxyHost=krmp-proxy.9rum.cc\nsystemProp.http.proxyPor
 
 RUN ./gradlew clean build -x test
 
+COPY --from=builder /home/gradle/project/build/libs/matgpt-0.0.1-SNAPSHOT.jar .
+
 ENV DATABASE_URL=jdbc:mysql://mysql/matgpt_db
 
 CMD ["java", "-jar", "-Dspring.profiles.active=deploy", "/home/gradle/project/build/libs/matgpt-0.0.1-SNAPSHOT.jar"]
