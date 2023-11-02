@@ -1,3 +1,6 @@
+
+
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -41,12 +44,12 @@ spring:
             starttls:
               enable: true
 
-    logging:
-      level:
+logging:
+  level:
         root: INFO
 
-    server:
-      port: 8080
+server:
+  port: 8080
 
 jwt:
   secret: ${JWTSECRET}
