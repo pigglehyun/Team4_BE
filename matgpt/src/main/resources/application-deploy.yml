@@ -1,5 +1,4 @@
 spring:
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://mysql:3306/matgpt_db?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
