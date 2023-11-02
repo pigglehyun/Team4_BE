@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          # 여러분의 mariadb image 주소를 입력해주세요.
+          # 여러분의 db image 주소를 입력해주세요.
           image: mysql:8.0
           env:
             - name: TZ
@@ -23,8 +23,8 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: secret
-                  key: MYSQL_ROOT_PASSWORD
+                    name: secret
+                    key: MYSQL_ROOT_PASSWORD
             - name: MYSQLUSERNAME
               valueFrom:
                 secretKeyRef:
@@ -65,14 +65,3 @@ spec:
           requests:
             storage: 1Gi
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-spec:
-  type: ClusterIP
-  clusterIP: None # Headless
-  selector:
-    app: mysql
-  ports:
-    - port: 3306
