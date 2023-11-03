@@ -25,7 +25,7 @@ RUN chmod +x gradlew
 RUN ./gradlew clean build -x test
 
 
-FROM builder AS final
+#FROM builder AS final
 COPY --from=builder /home/gradle/project/build/libs/matgpt-0.0.1-SNAPSHOT.jar .
 
 # DATABASE_URL을 환경 변수로 삽입
