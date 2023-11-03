@@ -9,7 +9,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/matgpt_db?rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: ${DATABASE_URL}?rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: ${MYSQLUSERNAME}
     password: ${MYSQLPASSWORD}
   security:
