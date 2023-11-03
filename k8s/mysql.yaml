@@ -65,3 +65,15 @@ spec:
           requests:
             storage: 1Gi
 ---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  type: ClusterIP
+  clusterIP: None # Headless
+  selector:
+    app: mysql
+  ports:
+    - port: 3306
