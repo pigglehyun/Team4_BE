@@ -12,7 +12,6 @@ spring:
     url: jdbc:mysql://mysql:3306/matgpt_db?rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: ${MYSQLUSERNAME}
     password: ${MYSQLPASSWORD}
-
   security:
     oauth2:
       client:
@@ -23,39 +22,21 @@ spring:
           kakao:
             client-id: ${KAKAOCLIENTID}
             client-secret: ${KAKAOCLIENTSECRET}
-
-
-
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQLDial
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: none
-    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
-        show_sql: true
+      default_batch_fetch_size: 100
     open-in-view: false
 
-
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: ${USERNAME}
-      password: ${PASSWORD}
-      properties:
-        mail:
-          smtp:
-            auth: true
-            starttls:
-              enable: true
 
 logging:
   level:
     root: INFO
-
 
 
 jwt:
@@ -71,7 +52,6 @@ springdoc:
 chatgpt:
   api:
     key: ${GPTAPIKEY}
-
 
 
 cloud:
