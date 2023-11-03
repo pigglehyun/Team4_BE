@@ -32,4 +32,4 @@ ENV DATABASE_URL=jdbc:mysql://mysql/matgpt_db
 
 
 # 빌드 결과 jar 파일을 실행
-CMD ["java", "-jar", "-Dspring.profiles.active=deploy", "/home/gradle/project/build/libs/matgpt-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "-Dspring.profiles.active=deploy", "matgpt-0.0.1-SNAPSHOT.jar"]
