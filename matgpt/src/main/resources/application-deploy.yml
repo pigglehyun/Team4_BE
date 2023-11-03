@@ -9,9 +9,19 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DATABASE_URL}?rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/matgpt_db?allowPublicKeyRetrieval=true&useSSL=false
     username: ${MYSQLUSERNAME}
     password: ${MYSQLPASSWORD}
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+      default_batch_fetch_size: 100
+    open-in-view: false
   security:
     oauth2:
       client:
@@ -22,30 +32,20 @@ spring:
           kakao:
             client-id: ${KAKAOCLIENTID}
             client-secret: ${KAKAOCLIENTSECRET}
-  jpa:
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQLDialect
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-      default_batch_fetch_size: 100
-    open-in-view: false
 
 
               
-# mail:
-#   host: smtp.gmail.com
-#   port: 587
-#   username: ${USERNAME}
-#   password: ${PASSWORD}
-#   properties:
-#     mail:
-#       smtp:
-#         auth: true
-#         starttls:
-#           enable: true
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: ${USERNAME}
+  password: ${PASSWORD}
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+          enable: true
 
 logging:
   level:
