@@ -26,13 +26,26 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
       default_batch_fetch_size: 100
     open-in-view: false
 
+
+              
+# mail:
+#   host: smtp.gmail.com
+#   port: 587
+#   username: ${USERNAME}
+#   password: ${PASSWORD}
+#   properties:
+#     mail:
+#       smtp:
+#         auth: true
+#         starttls:
+#           enable: true
 
 logging:
   level:
