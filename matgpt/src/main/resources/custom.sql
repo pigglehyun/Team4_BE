@@ -8,11 +8,7 @@
 
 
 # -- Category Table Initialization
-# INSERT INTO category_tb (id, name) VALUES
-#                                        (1, 'KOREAN'),
-#                                        (2, 'CHINESE'),
-#                                        (3, 'DESSERT'),
-#                                        (4, 'JAPANESE');
+# INSERT INTO category_tb (id, name) VALUES (1, 'KOREAN'),(2, 'CHINESE'),(3, 'DESSERT'),(4, 'JAPANESE');
 # -- User Table Initalization
 # INSERT INTO user_tb (AGE_GROUP, EMAIL_VERIFIED, EMAIL, GENDER, NAME, PROVIDER, PROVIDER_ID)
 # VALUES (2, null, 'nstgic3@gmail.com', 'FEMALE', 'ac98bef6-79c0-4a7b-b9b4-9c3e397dbbd7', 'KAKAO', 3038773712);
