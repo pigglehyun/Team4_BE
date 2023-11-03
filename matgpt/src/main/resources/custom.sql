@@ -1,3 +1,13 @@
+drop table if exists category_tb CASCADE;
+drop table if exists user_tb CASCADE;
+drop table if exists sub_category_tb CASCADE;
+drop table if exists store_tb CASCADE;
+drop table if exists likestore_tb CASCADE;
+drop table if exists review_tb CASCADE;
+
+
+
+
 -- Category Table Initialization
 INSERT INTO category_tb (id, name) VALUES
                                        (1, 'KOREAN'),
