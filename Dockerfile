@@ -18,8 +18,7 @@ RUN gradle init
 # gradle wrapper를 프로젝트에 추가
 RUN gradle wrapper
 
-# gradlew를 이용한 프로젝트 필드
-RUN chmod +x gradlew
+
 
 # gradlew를 이용한 프로젝트 필드
 RUN ./gradlew clean build -x test
