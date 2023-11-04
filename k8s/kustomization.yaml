@@ -3,7 +3,6 @@ resources:
   - nginx.yaml
   - mysql.yaml
   - backend.yaml
-  - redis.yaml
   - ingress.yaml
 configMapGenerator:
   - name: nginx

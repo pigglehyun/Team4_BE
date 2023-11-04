@@ -9,7 +9,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/matgpt_db?allowPublicKeyRetrieval=true&useSSL=false
+    url: jdbc:mysql://mysql:3306/matgpt_db?useSSL=false&rewriteBatchedStatements=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: ${MYSQLUSERNAME}
     password: ${MYSQLPASSWORD}
   
@@ -23,10 +23,7 @@ spring:
         format_sql: true
       default_batch_fetch_size: 100
     open-in-view: false
-    
-  redis:
-    host: redis
-    port: 6379
+
   
   security:
     oauth2:
