@@ -12,17 +12,18 @@ spring:
     url: jdbc:mysql://localhost:3306/matgpt_db?rewriteBatchedStatements=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: ${MYSQLUSERNAME}
     password: ${MYSQLPASSWORD}
+  
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: none
-    show-sql: true
     properties:
       hibernate:
         format_sql: true
       default_batch_fetch_size: 100
     open-in-view: false
+  
   security:
     oauth2:
       client:
