@@ -40,6 +40,8 @@ public class HttpConnectionProxyConfig {
                 .requestFactory(() -> clientHttpRequestFactory)
                 .additionalInterceptors((request, body, execution) -> {
                     HttpHeaders headers = request.getHeaders();
+                    
+                    System.out.println("Request Headers: " + headers);
 
                     // Add the Authorization header only for requests to the OpenAI API
                     if (request.getURI().getHost().equals("api.openai.com")) {
