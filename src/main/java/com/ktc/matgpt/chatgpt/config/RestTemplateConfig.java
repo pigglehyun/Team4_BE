@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
-@Profile(value = {"deploy"})
+@Profile("deploy")
 @Configuration
 public class RestTemplateConfig {
 

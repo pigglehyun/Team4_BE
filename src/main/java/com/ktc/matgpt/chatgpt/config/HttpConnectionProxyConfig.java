@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 
-@Profile(value = {"deploy"})
+@Profile("deploy")
 @Configuration
 public class HttpConnectionProxyConfig {
     private static final String PROXY_HOST = "krmp-proxy.9rum.cc";
