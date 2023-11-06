@@ -1,21 +1,18 @@
 package com.ktc.matgpt.chatgpt.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.net.ProxySelector;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
 
 @Profile(value = {"deploy"})
 @Configuration
@@ -29,22 +26,29 @@ public class HttpConnectionProxyConfig {
     private String apiKey;
 
     @Bean
-    public HttpClient httpClientWithGlobalProxy() {
+    public RestTemplate restTemplateWithGlobalProxy(RestTemplateBuilder builder) {
+        SimpleClientHttpRequestFactory clientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(PROXY_HOST, PROXY_PORT));
-        return HttpClient.newBuilder()
-                .proxy(ProxySelector.of(new InetSocketAddress(PROXY_HOST, PROXY_PORT)))
-                .connectTimeout(API_RESPONSE_TIMEOUT)
-                .build();
-    }
+        clientHttpRequestFactory.setProxy(proxy);
 
-    public CompletableFuture<HttpResponse<String>> fetchFromOpenAI(HttpClient httpClient) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.openai.com/v1/chat/completions")) // Replace 'your-endpoint' with the actual endpoint
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .GET()
-                .build();
+        // Set timeouts
+        clientHttpRequestFactory.setConnectTimeout((int) API_RESPONSE_TIMEOUT.toMillis());
+        clientHttpRequestFactory.setReadTimeout((int) API_RESPONSE_TIMEOUT.toMillis());
 
-        return httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+        return builder
+                .requestFactory(() -> clientHttpRequestFactory)
+                .additionalInterceptors((request, body, execution) -> {
+                    HttpHeaders headers = request.getHeaders();
+
+                    // Add the Authorization header only for requests to the OpenAI API
+                    if (request.getURI().getHost().equals("api.openai.com")) {
+                        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
+                    }
+
+                    headers.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+                    return execution.execute(request, body);
+                })
+                .build();
     }
 }
