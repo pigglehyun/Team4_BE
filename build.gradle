@@ -60,7 +60,7 @@ tasks.named('test') {
 
 
 bootRun {
-    String activeProfile = "dev"
+    String activeProfile = "deploy"
     systemProperty "spring.profiles.active", activeProfile
 }
 
