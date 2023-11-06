@@ -44,7 +44,8 @@ public class HttpConnectionProxyConfig {
                  
 
                     // Add the Authorization header only for requests to the OpenAI API
-                    if (request.getURI().getHost().equals("api.openai.com")) {
+                    if (request.getURI().getHost() == ("api.openai.com")) {
+                        System.out.println("Request Headers: " + apiKey);
                         headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
                     }
 
