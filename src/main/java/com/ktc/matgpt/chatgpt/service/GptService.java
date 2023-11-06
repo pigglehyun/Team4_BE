@@ -115,7 +115,7 @@ public class GptService {
         return gptReviews.get(0).getLastNumsOfReview();
     }
 
-    @Async
+    @Transactional
     public CompletableFuture<GptApiResponse> callChatGptApi(GptApiRequest requestBody) {
         return CompletableFuture.supplyAsync(() -> {
             try {
