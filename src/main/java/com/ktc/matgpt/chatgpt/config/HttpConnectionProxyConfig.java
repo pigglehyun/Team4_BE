@@ -41,12 +41,10 @@ public class HttpConnectionProxyConfig {
                 .additionalInterceptors((request, body, execution) -> {
                     HttpHeaders headers = request.getHeaders();
                     
-                    System.out.println("Request Headers: " + headers);
-     
-                    System.out.println("Request Host 2 : " + request.getURI().getHost());
+                 
 
                     // Add the Authorization header only for requests to the OpenAI API
-                    if (request.getURI().getHost().contains("openai") || request.getURI().getHost().contains("gpt")) {
+                    if (request.getURI().getHost().equals("api.openai.com")) {
                         headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + apiKey);
                     }
 
